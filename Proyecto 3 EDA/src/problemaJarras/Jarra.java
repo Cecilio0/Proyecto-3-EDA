@@ -1,6 +1,6 @@
 package problemaJarras;
 
-public class Jarra {
+public class Jarra {//para contener la informacion de cada Jarra
 	
 	private int size;
 	private int cantAgua;

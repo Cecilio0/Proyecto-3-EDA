@@ -1,8 +1,14 @@
 package arbolAPS;
 
-public class APS <T extends Comparable<T>>{
+public class APS <T extends Object>{//Un Arbol Primer hijo Siguiente hermano generico. para el desarollo de este es importante recordar que para este tipo de arbol es posible tener mas de dos hijo
 	
 	private Nodo<T> raiz;
+	
+	//hay varios metodos que no son necesarios dentro de nuestro proyecto pero es bueno tenerlos para manetener la forma de un arbol APS generico
+	
+	public APS() {
+		raiz = null;
+	}
 	
 	public APS(T llave) {
 		raiz = new Nodo<T>(llave);
@@ -12,38 +18,27 @@ public class APS <T extends Comparable<T>>{
 		return raiz;
 	}
 
-	public void setRaiz(Nodo<T> raiz) {
+	public void setRaiz(Nodo<T> raiz) {//es posible que este metodo no sea necesario para nuestro proyecto en especifico
 		this.raiz = raiz;
 	}
 	
 	// es necesario hacer los metodos insertar, eliminar y buscar
 	
-	//para el metodo insertar es sagrado recordar que para la raiz el hermano es null
-	
-	//para el formato primer hijo siguiente hermano se puede usar la verificacion si n es menor que  
-	//el nodo actual que se esta revisando y mayor que el primer hijo de el mismo entonces verificar
-	//si es mayor que el siguiente hermano e insertarlo cuando no sea el caso, es necesario tambien 
-	//recordar que si esta entre dos hermanos el siguiente hermano se debe reasginar como siguiente
-	//hermano del que se acaba de insertar
-	public void insertar(T llave) {//valor de retorno puede cambiar
-		insertarNodo(new Nodo<T>(llave), raiz);
-	}
-	
-	public void insertarNodo(Nodo<T> n, Nodo<T> r) {//valor de retorno puede cambiar
+	//para hacer este metodo se usa el Nodo n que es el que queremos insertar y el Nodo 
+	//r el cual correspondera al que sera el padre de n
+	public void insertNodo(Nodo<T> n, Nodo<T> r) {
 		
 	}
 	
-	//no le he pensado mucho todavia
-	public void eliminarNodo(T llave) {//valor de retorno puede cambiar
+	//simplemente que busque la llave y cambie las relaciones entre Nodos al eliminar el 
+	//Nodo de dicha llave
+	public void eliminarNodo(T llave) {//es posible que este metodo no sea necesario para nuestro proyecto en especifico
 		
 	}
 	
-	//para el metodo buscar es importante recordar que si el 
-	
-	//para el metodo buscar se puede usar la misma logica que para el insertar si la llave es menor
-	//que el nodo actual se sigue con el primer hijo y si es mayor que el nodo actual se sigue
-	//buscando por el siguiente hermano del primer hijo, asi tambien evitamos problemas con la raiz
-	public Nodo<T> buscar() {
+	//para este metodo se podria hacer una recursion estilo divide y venceras que busque por 
+	//el siguiente hijo y el siguiente hermano si es que no son nulos
+	public Nodo<T> buscarNodo(T llave) {
 	 return null;
 	}
 	

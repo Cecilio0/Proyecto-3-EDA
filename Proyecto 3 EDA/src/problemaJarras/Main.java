@@ -1,10 +1,13 @@
 package problemaJarras;
 
+import arbolAPS.*;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		APS<Jarras> arbol = new APS<Jarras>();
+		SolProblema solucion = new SolProblema(arbol);
+		
 	}
 
 }
