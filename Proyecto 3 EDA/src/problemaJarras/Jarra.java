@@ -5,9 +5,9 @@ public class Jarra {//para contener la informacion de cada Jarra
 	private int size;
 	private int cantAgua;
 	
-	public Jarra(int size) {
+	public Jarra(int size, int cantAgua) {
 		this.size = size;
-		cantAgua = 0;
+		this.cantAgua = cantAgua;
 	}
 	
 	public int getSize() {

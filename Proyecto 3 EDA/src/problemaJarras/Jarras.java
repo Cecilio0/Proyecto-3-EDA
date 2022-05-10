@@ -6,9 +6,9 @@ public class Jarras {//funciona como el objeto que existira dentro del Nodo
 	private Jarra jarra3L;
 	private boolean activo;//para determinar si se debe seguir usando para la creacion de nuevas generaciones
 	
-	public Jarras(int size1, int size2) {
-		jarra4L = new Jarra(size1);
-		jarra3L = new Jarra(size2);
+	public Jarras(int size1, int size2, int cantAgua4L, int cantAgua3L) {
+		jarra4L = new Jarra(size1, cantAgua4L);
+		jarra3L = new Jarra(size2, cantAgua3L);
 		activo = true;
 	}
 	
@@ -29,7 +29,7 @@ public class Jarras {//funciona como el objeto que existira dentro del Nodo
 	}
 
 	public void llenar() {//llena una jarra en especifico
-	
+		
 	}
 	
 	public void vaciar() {//vacia una jarra en especifico
