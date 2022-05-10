@@ -2,6 +2,7 @@ package arbolAPS;
 
 public class Nodo <T extends Object>{//Nodo de arbol Primer hijo Siguiente hermano generico
 	
+	private Nodo<T> padre;
 	private Nodo<T> primHijo;
 	private Nodo<T> sigHermano;
 	private T llave;

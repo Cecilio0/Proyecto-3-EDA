@@ -42,9 +42,6 @@ public class APS <T extends Object>{//Un Arbol Primer hijo Siguiente hermano gen
 	 return null;
 	}
 	
-	
-	
-	
-	
+
 }
 
