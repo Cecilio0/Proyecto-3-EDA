@@ -63,7 +63,7 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 		boolean aux;
 		for (int i = 0; i < nuevosHijos.size(); i++) {
 			if (aux = verificarRepetido(nuevosHijos.get(i))) {//para no insertar nodos repetidos
-				arbol.insertNodo(n, nuevosHijos.get(i));
+				arbol.insertNodo(nuevosHijos.get(i), n);
 			}
 			nuevosHijos.get(i).getLlave().setActivo(aux);//los pone inactivos para que no se usen en resolver
 		}
@@ -80,8 +80,9 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 			nodo = arbol.buscarNodo(nodo.getPadre());
 		}
 		while (!camino.empty()) {
-			System.out.println(camino.pop().getLlave().toString() + " ");
+			System.out.print(camino.pop().getLlave().toString() + " ");
 		}
+		System.out.println();
 	}
 
 	public boolean isActivo(Nodo<Jarras> nodo) {// revisa si un Nodo esta activo
