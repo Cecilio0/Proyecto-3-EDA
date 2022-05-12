@@ -1,11 +1,10 @@
 package arbolAPS;
 
+public class APS <T extends Comparable<T>>{
 
-public class APS {
+	protected Nodo<T> raiz;
 
-	protected Nodo raiz;
-
-	public APS(Nodo raiz) {
+	public APS(Nodo<T> raiz) {
 		super();
 		this.raiz = raiz;
 	}
@@ -14,21 +13,21 @@ public class APS {
 		super();
 	}
 
-	public Nodo getRaiz() {
+	public Nodo<T> getRaiz() {
 		return raiz;
 	}
 
-	public void insertNodo(Jarras llaveN, Nodo padre) throws ExceptionNodo {
+	public void insertNodo(T llaveN, Nodo<T> padre) {
 
-		raiz = insertNodo(new Nodo(llaveN), padre);
+		raiz = insertNodo(new Nodo<T>(llaveN), padre);
 	}
 
-	public Nodo insertNodo(Nodo n, Nodo padre) throws ExceptionNodo {
+	public Nodo<T> insertNodo(Nodo<T> n, Nodo<T> padre) {//es necesario corregir este metodo
 		if (padre == null) {
 			padre = n;
 		} else {
 
-			Nodo Nodoaux = buscarNodo(padre.getLlave());
+			Nodo<T> Nodoaux = buscarNodo(padre.getLlave());
 			if (Nodoaux.getHijo() == null) {
 				Nodoaux.setHijo(Nodoaux);
 			} else {
@@ -43,20 +42,22 @@ public class APS {
 		return padre;
 	}
 
-	public Nodo buscarNodo(Jarras llaveN) throws ExceptionNodo {
-		return buscarNodo(new Nodo(llaveN), raiz);
+	public Nodo<T> buscarNodo(T llaveN) {
+		return buscarNodo(new Nodo<T>(llaveN), raiz);
 	}
 
-	protected Nodo buscarNodo(Nodo n, Nodo r) throws ExceptionNodo {
+	protected Nodo<T> buscarNodo(Nodo<T> n, Nodo<T> r) {
+		/*No es necesario para el arbol generico
 		int r4 = r.getLlave().getJarra4L().getCantAgua();
 		int r3 = r.getLlave().getJarra3L().getCantAgua();
 		int n4 = n.getLlave().getJarra4L().getCantAgua();
 		int n3 = n.getLlave().getJarra3L().getCantAgua();
-		Nodo a = null;
-		Nodo b=null;
-		if (r3 == n3 && n4 == r4) {
+		*/
+		Nodo<T> a = null;
+		Nodo<T> b=null;
+		if (r.getLlave().compareTo(n.getLlave()) == 0) {
 			return r;
-		}  if (r.getHijo() == null && r.getSigHermano() == null) {
+		}  if (r.getLlave() == null && r.getSigHermano() == null) {
 			return null;
 		}  if (r.getSigHermano() != null) {
 			 a = buscarNodo(n, r.getSigHermano());
@@ -65,16 +66,16 @@ public class APS {
 		}
 		if(a!=null) return a; else return b;
 	}
-
+	/*
 	public static void main(String[] args) {
-
-		Nodo n1 = new Nodo(new Jarras(0, 0));
-		Nodo n2 = new Nodo(new Jarras(4, 3));
-		Nodo n3 = new Nodo(new Jarras(2, 3));
-		Nodo n4 = new Nodo(new Jarras(1, 2));
-		Nodo n5 = new Nodo(new Jarras(4, 2));
-
-		APS ab = new APS(n1);
+		//esto deja de ser necesario
+		Nodo<T> n1 = new Nodo<T>(new Jarras(0, 0));
+		Nodo<T> n2 = new Nodo<T>(new Jarras(4, 3));
+		Nodo<T> n3 = new Nodo<T>(new Jarras(2, 3));
+		Nodo<T> n4 = new Nodo<T>(new Jarras(1, 2));
+		Nodo<T> n5 = new Nodo<T>(new Jarras(4, 2));
+		
+		APS<T> ab = new APS(n1);
 		n1.setHijo(n2);	
 		n2.setHijo(n4);
 		n2.setSigHermano(n3);
@@ -83,16 +84,13 @@ public class APS {
 			System.out.println(ab.buscarNodo(n4.getLlave()));
 			ab.insertNodo(n5, n1);
 			System.out.println(ab.buscarNodo(n5.getLlave()));
-		} catch (ExceptionNodo e1) {
+		} catch ( e1) {
 
 			e1.printStackTrace();
 		}
 
 	}
-
-	class ExceptionNodo extends Exception {
-		public ExceptionNodo(String s) {
-			super(s);
-		}
-	}
+	*/
+	
+	
 }

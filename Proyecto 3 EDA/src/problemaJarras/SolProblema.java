@@ -6,7 +6,7 @@ import arbolAPS.*;
 public class SolProblema {// esta clase se ocupa de resolver el problema de las Jarras
 
 	private APS<Jarras> arbol;
-	
+	//pensar en una variable que contenga los caminos o rutas a las soluciones
 
 	public SolProblema(APS<Jarras> arbol) {
 		this.arbol = arbol;
@@ -31,16 +31,16 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 		ArrayList<Nodo<Jarras>> nuevosHijos = new ArrayList<Nodo<Jarras>>();
 		
 		if (cantAgua3L(n) != 3) {//llenar 3L
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, 3, cantAgua4L(n), 3)));	
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(cantAgua4L(n), 3)));	
 		}
 		if (cantAgua4L(n) != 4) {//llenar 4L
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, 3, 4, cantAgua3L(n))));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, cantAgua3L(n))));
 		}
 		if (cantAgua3L(n) != 0) {//Vaciar 3L
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, 3, cantAgua4L(n), 0)));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(cantAgua4L(n), 0)));
 		}
 		if (cantAgua4L(n) != 0) {//Vaciar 4L
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, 3, 0, cantAgua3L(n))));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(0, cantAgua3L(n))));
 		}
 		if (cantAgua4L(n) != 4 && cantAgua3L(n) != 0) {//Trasvasar 3L a 4L 
 			int aux3L = cantAgua3L(n);
@@ -49,7 +49,7 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 				aux4L++;
 				aux3L--;
 			}
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, 3, aux4L, aux3L)));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(aux4L, aux3L)));
 		}
 		if (cantAgua4L(n) != 0 && cantAgua3L(n) != 3) {//Trasvasar 4L a 3L
 			int aux3L = cantAgua3L(n);
@@ -58,7 +58,7 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 				aux4L--;
 				aux3L++;
 			}
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, 3, aux4L, aux3L)));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(aux4L, aux3L)));
 		}
 		boolean aux;
 		for (int i = 0; i < nuevosHijos.size(); i++) {
@@ -77,7 +77,7 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 		Nodo<Jarras> nodo = n;
 		while (nodo.getPadre() != null) {
 			camino.push(nodo);
-			nodo = nodo.getPadre();
+			nodo = arbol.buscarNodo(nodo.getPadre());
 		}
 		while (!camino.empty()) {
 			System.out.println(camino.pop().getLlave().toString() + " ");

@@ -27,7 +27,7 @@ class JarraE extends Exception {
 	}
 }
 
-public class Jarras {// funciona como el objeto que existira dentro del Nodo
+public class Jarras implements Comparable<Jarras>{// funciona como el objeto que existira dentro del Nodo
 
 	private Jarra jarra4L;
 	private Jarra jarra3L;
@@ -105,44 +105,14 @@ public class Jarras {// funciona como el objeto que existira dentro del Nodo
 		}
 	}
 
-	// Main Prueba
-	public static void main(String[] args) {
-
-//		// arra1 size, jarra2 size , jarra1 cant, jarar2 cant
-//		Jarras j = new Jarras(4, 3, 3, 2);
-//
-//		// Vaciar Prueba
-//		System.out.println("Vaciar");
-//		System.out.println("Jarra 4l: " + j.getJarra4L().getCantAgua());
-//		try {
-//			vaciar(j.getJarra4L());
-//		} catch (JarraVacia e) {
-//			e.getMessage();
-//		}
-//		System.out.println("Jarra 4l: " + j.getJarra4L().getCantAgua());
-//		System.out.println();
-//
-//		// Llenar
-//		System.out.println("LLenar");
-//		try {
-//			llenar(j.getJarra4L());
-//		} catch (JarraLlena e) {
-//			e.getMessage();
-//		}
-//		System.out.println("Jarra 4l: " + j.getJarra4L().getCantAgua());
-//		System.out.println();
-//
-//		// Trasvaso
-//		System.out.println("Trasvaso");
-//		System.out.println("Jarra4L: " + j.getJarra4L().getCantAgua());
-//		System.out.println("Jarra3L: " + j.getJarra3L().getCantAgua());
-//		try {
-//			trasvasar(j.getJarra4L(), j.getJarra3L());
-//		} catch (JarraE e) {
-//			e.getMessage();
-//		}
-//		System.out.println("Jarra 4l: " + j.getJarra4L().getCantAgua());
-//		System.out.println("Jarra3L: " + j.getJarra3L().getCantAgua());
+	@Override
+	public int compareTo(Jarras o) {
+		if (this.getJarra3L().getCantAgua() == o.getJarra3L().getCantAgua() && this.getJarra4L().getCantAgua() == o.getJarra4L().getCantAgua()) {
+			return 0;
+		}
+		return 1;
 	}
-
+	
+	//hacer toString(){}
+	
 }
