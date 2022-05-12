@@ -4,13 +4,12 @@ public class APS<T extends Comparable<T>> {
 
 	protected Nodo<T> raiz;
 
-	public APS(Nodo<T> raiz) {
-		super();
+	public APS(Nodo<T> raiz) {//constructor con insercion inmediata de la raiz
 		this.raiz = raiz;
 	}
 
 	public APS() {
-		super();
+		raiz = null;
 	}
 
 	public Nodo<T> getRaiz() {
@@ -49,35 +48,19 @@ public class APS<T extends Comparable<T>> {
 	protected Nodo<T> buscarNodo(Nodo<T> n, Nodo<T> r) {
 		Nodo<T> a = null;
 		Nodo<T> b = null;
-		if (n.getLlave().compareTo(r.getLlave()) == 0) {
+		if (n.getLlave().compareTo(r.getLlave()) == 0) {//cuando sean iguales devuelve n
 			return r;
 		}
-		if (r.getSigHermano() != null) {
+		if (r.getSigHermano() != null) {//si tiene hermano iguala a a la busqueda por el hermano
 			a = buscarNodo(n, r.getSigHermano());
 		}
-		if (r.getHijo() != null) {
+		if (r.getHijo() != null) {//si tiene hijo iguala a b la busqueda por el hermano
 			b = buscarNodo(n, r.getHijo());
 		}
-		if (a != null)
-			return a;
-		else
-			return b;
+		if (a != null)//si a no es nulo significa que encontro algo
+			return a;//se devuelve a
+		else//si a es nulo significa que o no encontro nada o no estaba por la ruta del hermano
+			return b;//se devuelve b
 	}
-	/*
-	 * public static void main(String[] args) { //esto deja de ser necesario Nodo<T>
-	 * n1 = new Nodo<T>(new Jarras(0, 0)); Nodo<T> n2 = new Nodo<T>(new Jarras(4,
-	 * 3)); Nodo<T> n3 = new Nodo<T>(new Jarras(2, 3)); Nodo<T> n4 = new Nodo<T>(new
-	 * Jarras(1, 2)); Nodo<T> n5 = new Nodo<T>(new Jarras(4, 2));
-	 * 
-	 * APS<T> ab = new APS(n1); n1.setHijo(n2); n2.setHijo(n4);
-	 * n2.setSigHermano(n3);
-	 * 
-	 * try { System.out.println(ab.buscarNodo(n4.getLlave())); ab.insertNodo(n5,
-	 * n1); System.out.println(ab.buscarNodo(n5.getLlave())); } catch ( e1) {
-	 * 
-	 * e1.printStackTrace(); }
-	 * 
-	 * }
-	 */
 
 }

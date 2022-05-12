@@ -29,7 +29,7 @@ public class Nodo <T extends Comparable<T>>{
 		this.llave = llave;
 	}
 
-	public void setHijo(Nodo<T> hijo) {
+	public void setHijo(Nodo<T> hijo) {//cuando se añade un hijo se pone que su padre sea este
 		 if (hijo != null) {
 	            hijo.setPadre(this);
 	        }
@@ -54,7 +54,7 @@ public class Nodo <T extends Comparable<T>>{
 
 	public void setSigHermano(Nodo<T> hermano) {
 		 if (hermano != null) {
-	            hermano.setPadre(this.getPadre());
+	            hermano.setPadre(this.getPadre());//el padre del hermano es igual al del actual
 	        }
 		
 		this.sigHermano = hermano;

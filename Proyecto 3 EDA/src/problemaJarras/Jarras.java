@@ -1,32 +1,5 @@
 package problemaJarras;
 
-class JarraLlena extends Exception {
-
-	private static final long serialVersionUID = 1L;
-
-	public JarraLlena() {
-		super("La jarra ya esta llena");
-	}
-}
-
-class JarraVacia extends Exception {
-
-	private static final long serialVersionUID = 1L;
-
-	public JarraVacia() {
-		super("La jarra ya esta vacia");
-	}
-}
-
-class JarraE extends Exception {
-
-	private static final long serialVersionUID = 1L;
-
-	public JarraE() {
-		super("La jarra a la que se le quiere pasar esta llena o la que le va a pasar esta vacia");
-	}
-}
-
 public class Jarras implements Comparable<Jarras>{// funciona como el objeto que existira dentro del Nodo
 
 	private Jarra jarra4L;
@@ -59,54 +32,9 @@ public class Jarras implements Comparable<Jarras>{// funciona como el objeto que
 	public String toString() {
 		return "[jarra4L=" + jarra4L.getCantAgua() + ", jarra3L=" + jarra3L.getCantAgua() + "] ; ";
 	}
-  
-	public static void llenar(Jarra jarra1) throws JarraLlena {// llena una jarra en especifico
-		if (jarra1.getCantAgua() < jarra1.getSize()) {
-			jarra1.setCantAgua(jarra1.getSize());
-		} else {
-			// Excepcion Jarra esta llena
-			throw new JarraLlena();
-		}
-	}
-
-	public static void vaciar(Jarra jarra1) throws JarraVacia {// vaciar una jarra en especifico
-		if (jarra1.getCantAgua() > 0) {
-			jarra1.setCantAgua(0);
-		} else {
-			// Excepcion jarra ya esta vacia
-			throw new JarraVacia();
-		}
-	}
-
-	// para este metodo se debe restar de la jarra 1 y añadir a la jarra 2 pero nada
-	// mas en la medida que
-	// quepa liquido y si cabe todo pasarlo completamente a la jarra 2 y restarlo
-	// todo de la jarra1
-	public static void trasvasar(Jarra jarra1, Jarra jarra2) throws JarraE {// pasa liquido de una jarra a otra
-
-		// Pasar de jarra1 a jarra 2
-		if (jarra1.getCantAgua() < jarra1.getSize() && jarra2.getCantAgua() > 0) { // La jarra tiene espacio y la
-																					// otra
-																					// tiene liquido
-			// Agua de 1 + agua de 2 <= tamano de 1
-			if ((jarra1.getCantAgua() + jarra2.getCantAgua()) <= jarra1.getSize()) { // El trasvaso es <= al tamano
-																						// de 1
-				jarra1.setCantAgua(jarra1.getCantAgua() + jarra2.getCantAgua());
-				jarra2.setCantAgua(0);
-			} else {
-				// Agua de 1 + agua de 2 > tamano de 1
-				int temp = jarra1.getSize() - jarra1.getCantAgua();
-				jarra1.setCantAgua(jarra1.getCantAgua() + temp);
-				jarra2.setCantAgua(jarra2.getCantAgua() - temp);
-			}
-		} else {
-			// Excepcion jarra ya esta llena o vacia
-			throw new JarraE();
-		}
-	}
 
 	@Override
-	public int compareTo(Jarras o) {
+	public int compareTo(Jarras o) {//si las cantidades de agua ambas jarras dentro de Jarras son iguales devuelve 0, de resto 1
 		if (this.getJarra3L().getCantAgua() == o.getJarra3L().getCantAgua() && this.getJarra4L().getCantAgua() == o.getJarra4L().getCantAgua()) {
 			return 0;
 		}

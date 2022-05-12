@@ -6,11 +6,10 @@ import arbolAPS.*;
 public class SolProblema {// esta clase se ocupa de resolver el problema de las Jarras
 
 	private APS<Jarras> arbol;
-	//pensar en una variable que contenga los caminos o rutas a las soluciones
 
 	public SolProblema(APS<Jarras> arbol) {
 		this.arbol = arbol;
-		resolver();
+		resolver();//al crearse el arbol inmediatamente crea la solucion al problema
 	}
 
 	public void resolver() {// se encarga de hacer la solucion para el acertijo
@@ -20,10 +19,10 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 	public void resolver(Nodo<Jarras> n) {// se encarga de hacer la solucion para el acertijo
 		if (cantAgua3L(n) == 2 || cantAgua4L(n) == 2)
 			mostrarRuta(n);
-		else if (n.getLlave().isActivo()) {
+		else if (n.getLlave().isActivo()) {//unicamente crea generaciones si esta activo el nodo que se le envio
 			ArrayList<Nodo<Jarras>> nuevosHijos = nuevaGeneracion(n);
 			for (int i = 0; i < nuevosHijos.size(); i++)
-				resolver(nuevosHijos.get(i));
+				resolver(nuevosHijos.get(i));//se envia el ArrayList de los hijos de la nueva generacion al metodo resolver
 		}
 	}
 
@@ -67,21 +66,20 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 			}
 			nuevosHijos.get(i).getLlave().setActivo(aux);//los pone inactivos para que no se usen en resolver
 		}
-		return nuevosHijos;
+		return nuevosHijos;//devuelve el ArrayList con todos los de la posible nueva generacion
 	}
 
 	// para mostrar la ruta hacia un Nodo especifico, para facilitar hacer
-	// el metodo es posible hacerlo de manera similar a buscarNodo en APS
 	public void mostrarRuta(Nodo<Jarras> n) {
-		Stack<Nodo<Jarras>> camino = new Stack<Nodo<Jarras>>();
+		Stack<Nodo<Jarras>> camino = new Stack<Nodo<Jarras>>();//crea una pila
 		Nodo<Jarras> nodo = n;
-		while (nodo.getPadre() != null) {
+		while (nodo.getPadre() != null) {//recorre todos los padres hasta que el padre sea nulo
 			camino.push(nodo);
 			nodo = nodo.getPadre();
 		}
-		camino.push(nodo);
+		camino.push(nodo);//se inserta el ultimo nodo
 		while (!camino.empty()) {
-			System.out.print(camino.pop().getLlave().toString() + " ");
+			System.out.print(camino.pop().getLlave().toString() + " ");//se imprime la ruta 
 		}
 		System.out.println();
 	}
@@ -97,13 +95,10 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 	public int cantAgua3L(Nodo<Jarras> n) {//mucho texto
 		return n.getLlave().getJarra3L().getCantAgua();
 	}
-
-	// tambien es necesario pensar en una manera de devolver la respuesta, ya sea
-	// con un String o un System.out.print();
 	
 	public boolean verificarRepetido(Nodo<Jarras> n) {//verifica si ya existe el nodo, devuelve true si no esta repetido
 		Nodo<Jarras> aux = arbol.buscarNodo(n.getLlave());
-		if (aux != null) 
+		if (aux != null) //si es distinto de nulo quiere decir que si encontro un nodo con esa llave
 			return false;
 		return true;
 	}
