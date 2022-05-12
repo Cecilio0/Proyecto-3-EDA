@@ -4,7 +4,7 @@ public class Nodo <T extends Comparable<T>>{
 	protected T llave;
 	protected Nodo<T> hijo;
 	protected Nodo<T> sigHermano;
-	protected T padre;
+	protected Nodo<T> padre;
 
 	public Nodo (T llave) {
 		this.llave = llave;
@@ -13,7 +13,7 @@ public class Nodo <T extends Comparable<T>>{
 		sigHermano = null;
 	}
 
-	public Nodo (T llave, Nodo<T> hijo, Nodo<T> sigHermano, T padre) {
+	public Nodo (T llave, Nodo<T> hijo, Nodo<T> sigHermano, Nodo<T> padre) {
 		super();
 		this.llave = llave;
 		this.sigHermano = sigHermano;
@@ -31,7 +31,7 @@ public class Nodo <T extends Comparable<T>>{
 
 	public void setHijo(Nodo<T> hijo) {
 		 if (hijo != null) {
-	            hijo.setPadre(this.llave);
+	            hijo.setPadre(this);
 	        }
 		this.hijo = hijo;
 	}
@@ -44,18 +44,17 @@ public class Nodo <T extends Comparable<T>>{
 		return sigHermano;
 	}
 
-	public T getPadre() {
+	public Nodo<T> getPadre() {
 		return padre;
 	}
 
-	public void setPadre(T padre) {
-		
+	public void setPadre(Nodo<T> padre) {
 		this.padre = padre;
 	}
 
 	public void setSigHermano(Nodo<T> hermano) {
 		 if (hermano != null) {
-	            hermano.setPadre(this.llave);
+	            hermano.setPadre(this.getPadre());
 	        }
 		
 		this.sigHermano = hermano;

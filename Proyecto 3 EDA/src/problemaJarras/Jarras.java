@@ -57,7 +57,7 @@ public class Jarras implements Comparable<Jarras>{// funciona como el objeto que
   
 	@Override
 	public String toString() {
-		return "Jarras [jarra4L=" + jarra4L.getCantAgua() + ", jarra3L=" + jarra3L.getCantAgua() + "]";
+		return "[jarra4L=" + jarra4L.getCantAgua() + ", jarra3L=" + jarra3L.getCantAgua() + "] ; ";
 	}
   
 	public static void llenar(Jarra jarra1) throws JarraLlena {// llena una jarra en especifico
@@ -112,7 +112,5 @@ public class Jarras implements Comparable<Jarras>{// funciona como el objeto que
 		}
 		return 1;
 	}
-	
-	//hacer toString(){}
 	
 }

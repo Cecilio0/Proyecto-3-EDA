@@ -22,18 +22,18 @@ public class APS<T extends Comparable<T>> {
 		raiz = insertNodo(new Nodo<T>(llaveN), padre);
 	}
 
-	public Nodo<T> insertNodo(Nodo<T> n, Nodo<T> padre) {// es necesario corregir este metodo
-		if (padre == null) {
+	public Nodo<T> insertNodo(Nodo<T> n, Nodo<T> padre) {
+		if (padre == null) {//verifica si el padre existe
 			padre = n;
 		} else {
 			Nodo<T> Nodoaux;
 			// Nodo<T> Nodoaux = buscarNodo(padre.getLlave());
-			if ((Nodoaux = buscarNodo(padre.getLlave())) != null && Nodoaux.getHijo() == null) {
+			if ((Nodoaux = buscarNodo(padre.getLlave())) != null && Nodoaux.getHijo() == null) {//si el padre no tiene hijos pone el que se quiere insertar de hijo
 				Nodoaux.setHijo(n);
 			} else {
-				Nodoaux = Nodoaux.getHijo();
+				Nodoaux = Nodoaux.getHijo();//si si tiene hijos entonces se pasa al primer hijo
 				while (Nodoaux.getSigHermano() != null) {
-					Nodoaux = Nodoaux.getSigHermano();
+					Nodoaux = Nodoaux.getSigHermano();//se recorren los hermanos y se inserta en el primer hermano nulo
 				}
 				Nodoaux.setSigHermano(n);
 			}
@@ -47,13 +47,6 @@ public class APS<T extends Comparable<T>> {
 	}
 
 	protected Nodo<T> buscarNodo(Nodo<T> n, Nodo<T> r) {
-		/*
-		 * No es necesario para el arbol generico int r4 =
-		 * r.getLlave().getJarra4L().getCantAgua(); int r3 =
-		 * r.getLlave().getJarra3L().getCantAgua(); int n4 =
-		 * n.getLlave().getJarra4L().getCantAgua(); int n3 =
-		 * n.getLlave().getJarra3L().getCantAgua();
-		 */
 		Nodo<T> a = null;
 		Nodo<T> b = null;
 		if (n.getLlave().compareTo(r.getLlave()) == 0) {

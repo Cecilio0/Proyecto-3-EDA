@@ -77,8 +77,9 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 		Nodo<Jarras> nodo = n;
 		while (nodo.getPadre() != null) {
 			camino.push(nodo);
-			nodo = arbol.buscarNodo(nodo.getPadre());
+			nodo = nodo.getPadre();
 		}
+		camino.push(nodo);
 		while (!camino.empty()) {
 			System.out.print(camino.pop().getLlave().toString() + " ");
 		}
