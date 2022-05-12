@@ -56,7 +56,8 @@ public class Jarras {// funciona como el objeto que existira dentro del Nodo
 	public void setActivo(boolean activo) {// se debera cambiar cuando se repita este Nodo dentro del arbol
 		this.activo = activo;
 	}
-
+	
+	//al final estos metodos no parece que vayan a ser necesarios
 	public static void llenar(Jarra jarra1) throws JarraLlena {// llena una jarra en especifico
 		if (jarra1.getCantAgua() < jarra1.getSize()) {
 			jarra1.setCantAgua(jarra1.getSize());

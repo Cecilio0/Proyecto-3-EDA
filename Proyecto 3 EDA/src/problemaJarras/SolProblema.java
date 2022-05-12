@@ -6,6 +6,7 @@ import arbolAPS.*;
 public class SolProblema {// esta clase se ocupa de resolver el problema de las Jarras
 
 	private APS<Jarras> arbol;
+	
 
 	public SolProblema(APS<Jarras> arbol) {
 		this.arbol = arbol;
@@ -65,9 +66,6 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 				arbol.insertNodo(n, nuevosHijos.get(i));
 			}
 			nuevosHijos.get(i).getLlave().setActivo(aux);//los pone inactivos para que no se usen en resolver
-			/*insertar nodos repetidos
-			nuevosHijos.get(i).getLlave().setActivo(verificarRepetido(nuevosHijos.get(i)));
-			arbol.insertNodo(n, nuevosHijos.get(i));*/
 		}
 		return nuevosHijos;
 	}
@@ -82,7 +80,7 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 			nodo = nodo.getPadre();
 		}
 		while (!camino.empty()) {
-			System.out.println(camino.pop().getLlave().toString());
+			System.out.println(camino.pop().getLlave().toString() + " ");
 		}
 	}
 
