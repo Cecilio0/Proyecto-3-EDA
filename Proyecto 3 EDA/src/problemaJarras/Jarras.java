@@ -1,6 +1,5 @@
 package problemaJarras;
 
-
 class JarraLlena extends Exception {
 
 	private static final long serialVersionUID = 1L;
@@ -32,15 +31,14 @@ public class Jarras {// funciona como el objeto que existira dentro del Nodo
 
 	private Jarra jarra4L;
 	private Jarra jarra3L;
-	private boolean activo;// para determinar si se debe seguir usando para la creacion de nuevas
-							// generaciones
-
-	public Jarras(int size1, int size2, int cantAgua4L, int cantAgua3L) {
-		jarra4L = new Jarra(size1, cantAgua4L);
-		jarra3L = new Jarra(size2, cantAgua3L);
+	private boolean activo;//para determinar si se debe seguir usando para la creacion de nuevas generaciones
+	
+	public Jarras( int cantAgua4L, int cantAgua3L) {
+		jarra4L = new Jarra(4, cantAgua4L);
+		jarra3L = new Jarra(3, cantAgua3L);
 		activo = true;
 	}
-
+	
 	public Jarra getJarra4L() {
 		return jarra4L;
 	}
@@ -53,11 +51,15 @@ public class Jarras {// funciona como el objeto que existira dentro del Nodo
 		return activo;
 	}
 
-	public void setActivo(boolean activo) {// se debera cambiar cuando se repita este Nodo dentro del arbol
+	public void setActivo(boolean activo) {//se debera cambiar cuando se repita este Nodo dentro del arbol
 		this.activo = activo;
 	}
-	
-	//al final estos metodos no parece que vayan a ser necesarios
+  
+	@Override
+	public String toString() {
+		return "Jarras [jarra4L=" + jarra4L.getCantAgua() + ", jarra3L=" + jarra3L.getCantAgua() + "]";
+	}
+  
 	public static void llenar(Jarra jarra1) throws JarraLlena {// llena una jarra en especifico
 		if (jarra1.getCantAgua() < jarra1.getSize()) {
 			jarra1.setCantAgua(jarra1.getSize());

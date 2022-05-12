@@ -1,47 +1,98 @@
 package arbolAPS;
 
-public class APS <T extends Object>{//Un Arbol Primer hijo Siguiente hermano generico. para el desarollo de este es importante recordar que para este tipo de arbol es posible tener mas de dos hijo
-	
-	private Nodo<T> raiz;
-	
-	//hay varios metodos que no son necesarios dentro de nuestro proyecto pero es bueno tenerlos para manetener la forma de un arbol APS generico
-	
-	public APS() {
-		raiz = null;
-	}
-	
-	public APS(T llave) {
-		raiz = new Nodo<T>(llave);
+
+public class APS {
+
+	protected Nodo raiz;
+
+	public APS(Nodo raiz) {
+		super();
+		this.raiz = raiz;
 	}
 
-	public Nodo<T> getRaiz() {
+	public APS() {
+		super();
+	}
+
+	public Nodo getRaiz() {
 		return raiz;
 	}
 
-	public void setRaiz(Nodo<T> raiz) {//es posible que este metodo no sea necesario para nuestro proyecto en especifico
-		this.raiz = raiz;
-	}
-	
-	// es necesario hacer los metodos insertar, eliminar y buscar
-	
-	//para hacer este metodo se usa el Nodo n que es el que queremos insertar y el Nodo 
-	//r el cual correspondera al que sera el padre de n
-	public void insertNodo(Nodo<T> n, Nodo<T> r) {
-		
-	}
-	
-	//simplemente que busque la llave y cambie las relaciones entre Nodos al eliminar el 
-	//Nodo de dicha llave
-	public void eliminarNodo(T llave) {//es posible que este metodo no sea necesario para nuestro proyecto en especifico
-		
-	}
-	
-	//para este metodo se podria hacer una recursion estilo divide y venceras que busque por 
-	//el siguiente hijo y el siguiente hermano si es que no son nulos
-	public Nodo<T> buscarNodo(T llave) {
-	 return null;
-	}
-	
+	public void insertNodo(Jarras llaveN, Nodo padre) throws ExceptionNodo {
 
+		raiz = insertNodo(new Nodo(llaveN), padre);
+	}
+
+	public Nodo insertNodo(Nodo n, Nodo padre) throws ExceptionNodo {
+		if (padre == null) {
+			padre = n;
+		} else {
+
+			Nodo Nodoaux = buscarNodo(padre.getLlave());
+			if (Nodoaux.getHijo() == null) {
+				Nodoaux.setHijo(Nodoaux);
+			} else {
+				Nodoaux = Nodoaux.getHijo().getSigHermano();
+				while (Nodoaux.getSigHermano() != null) {
+					Nodoaux = Nodoaux.getSigHermano();
+				}
+				Nodoaux.setSigHermano(n);
+			}
+
+		}
+		return padre;
+	}
+
+	public Nodo buscarNodo(Jarras llaveN) throws ExceptionNodo {
+		return buscarNodo(new Nodo(llaveN), raiz);
+	}
+
+	protected Nodo buscarNodo(Nodo n, Nodo r) throws ExceptionNodo {
+		int r4 = r.getLlave().getJarra4L().getCantAgua();
+		int r3 = r.getLlave().getJarra3L().getCantAgua();
+		int n4 = n.getLlave().getJarra4L().getCantAgua();
+		int n3 = n.getLlave().getJarra3L().getCantAgua();
+		Nodo a = null;
+		Nodo b=null;
+		if (r3 == n3 && n4 == r4) {
+			return r;
+		}  if (r.getHijo() == null && r.getSigHermano() == null) {
+			return null;
+		}  if (r.getSigHermano() != null) {
+			 a = buscarNodo(n, r.getSigHermano());
+		}  if (r.getHijo() != null) {
+			 b = buscarNodo(n, r.getHijo());
+		}
+		if(a!=null) return a; else return b;
+	}
+
+	public static void main(String[] args) {
+
+		Nodo n1 = new Nodo(new Jarras(0, 0));
+		Nodo n2 = new Nodo(new Jarras(4, 3));
+		Nodo n3 = new Nodo(new Jarras(2, 3));
+		Nodo n4 = new Nodo(new Jarras(1, 2));
+		Nodo n5 = new Nodo(new Jarras(4, 2));
+
+		APS ab = new APS(n1);
+		n1.setHijo(n2);	
+		n2.setHijo(n4);
+		n2.setSigHermano(n3);
+
+		try {
+			System.out.println(ab.buscarNodo(n4.getLlave()));
+			ab.insertNodo(n5, n1);
+			System.out.println(ab.buscarNodo(n5.getLlave()));
+		} catch (ExceptionNodo e1) {
+
+			e1.printStackTrace();
+		}
+
+	}
+
+	class ExceptionNodo extends Exception {
+		public ExceptionNodo(String s) {
+			super(s);
+		}
+	}
 }
-

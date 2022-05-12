@@ -1,41 +1,70 @@
 package arbolAPS;
 
-public class Nodo <T extends Object>{//Nodo de arbol Primer hijo Siguiente hermano generico
-	
-	private Nodo<T> padre;
-	private Nodo<T> primHijo;
-	private Nodo<T> sigHermano;
-	private T llave;
-	
-	public Nodo(T llave) {
+public class Nodo {
+	protected Jarras llave;
+	protected Nodo hijo;
+	protected Nodo sigHermano;
+	protected Jarras padre;
+
+	public Nodo(Jarras llave) {
 		this.llave = llave;
-		this.primHijo = null;
-		this.sigHermano = null;
+		padre = null;
+		hijo = null;
+		sigHermano = null;
 	}
 
-	public Nodo<T> getPrimHijo() {
-		return primHijo;
-	}
-
-	public void setPrimHijo(Nodo<T> primHijo) {
-		this.primHijo = primHijo;
-	}
-
-	public Nodo<T> getSigHermano() {
-		return sigHermano;
-	}
-
-	public void setSigHermano(Nodo<T> sigHermano) {
+	public Nodo(Jarras llave, Nodo hijo, Nodo sigHermano, Jarras padre) {
+		super();
+		this.llave = llave;
 		this.sigHermano = sigHermano;
+		this.hijo = hijo;
+		this.padre = padre;
 	}
 
-	public T getLlave() {
+	public Jarras getLlave() {
 		return llave;
 	}
 
-	public void setLlave(T llave) {//no estoy seguro de si es necesario todavia
+	public void setLlave(Jarras llave) {
 		this.llave = llave;
 	}
-	
-	
+
+	public void setHijo(Nodo hijo) {
+		 if (hijo != null) {
+	            hijo.setPadre(this.llave);
+	        }
+		this.hijo = hijo;
+	}
+
+	public Nodo getHijo() {
+		return hijo;
+	}
+
+	public Nodo getSigHermano() {
+		return sigHermano;
+	}
+
+	public Jarras getPadre() {
+		return padre;
+	}
+
+	public void setPadre(Jarras padre) {
+		
+		this.padre = padre;
+	}
+
+	public void setSigHermano(Nodo hermano) {
+		 if (hermano != null) {
+	            hermano.setPadre(this.llave);
+	        }
+		
+		this.sigHermano = hermano;
+	}
+
+	@Override
+	public String toString() {
+		return "NodoB [llave=" + llave.getJarra4L().getCantAgua() + " " + llave.getJarra3L().getCantAgua() + ", hijo="
+				+ hijo + ", siguienteHermano=" + sigHermano + ", padre=" + padre + "]";
+	}
+
 }
