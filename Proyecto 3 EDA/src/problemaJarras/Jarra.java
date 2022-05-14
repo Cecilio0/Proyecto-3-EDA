@@ -21,7 +21,4 @@ public class Jarra {//para contener la informacion de cada Jarra
 	public void setCantAgua(int cantAgua) {
 		this.cantAgua = cantAgua;
 	}
-	
-	
-
 }

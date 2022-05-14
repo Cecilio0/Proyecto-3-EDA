@@ -8,23 +8,12 @@ public class APS<T extends Comparable<T>> {
 		this.raiz = raiz;
 	}
 
-	public APS() {
-		raiz = null;
-	}
-
 	public Nodo<T> getRaiz() {
 		return raiz;
 	}
-
-	public void insertNodo(T llaveN, Nodo<T> padre) {
-
-		raiz = insertNodo(new Nodo<T>(llaveN), padre);
-	}
-
-	public Nodo<T> insertNodo(Nodo<T> n, Nodo<T> padre) {
-		if (padre == null) {//verifica si el padre existe
-			padre = n;
-		} else {
+	
+	public void insertNodo(Nodo<T> n, Nodo<T> padre) {
+		if (padre != null) {//verifica si el padre existe
 			Nodo<T> Nodoaux;
 			// Nodo<T> Nodoaux = buscarNodo(padre.getLlave());
 			if ((Nodoaux = buscarNodo(padre.getLlave())) != null && Nodoaux.getHijo() == null) {//si el padre no tiene hijos pone el que se quiere insertar de hijo
@@ -38,7 +27,6 @@ public class APS<T extends Comparable<T>> {
 			}
 
 		}
-		return padre;
 	}
 
 	public Nodo<T> buscarNodo(T llaveN) {
