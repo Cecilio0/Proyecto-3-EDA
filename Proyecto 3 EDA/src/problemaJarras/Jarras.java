@@ -5,11 +5,13 @@ public class Jarras implements Comparable<Jarras>{// funciona como el objeto que
 	private Jarra jarra4L;
 	private Jarra jarra3L;
 	private boolean activo;//para determinar si se debe seguir usando para la creacion de nuevas generaciones
-	
-	public Jarras( int cantAgua4L, int cantAgua3L) {
+	private String accion;//accion que se desarrollo del paso anterior a este
+
+	public Jarras( int cantAgua4L, int cantAgua3L, String accion) {
 		jarra4L = new Jarra(4, cantAgua4L);
 		jarra3L = new Jarra(3, cantAgua3L);
 		activo = true;
+		this.accion = accion;
 	}
 	
 	public Jarra getJarra4L() {
@@ -28,9 +30,13 @@ public class Jarras implements Comparable<Jarras>{// funciona como el objeto que
 		this.activo = activo;
 	}
   
+	public String getAccion() {
+		return accion;
+	}
+	
 	@Override
 	public String toString() {
-		return "[jarra4L=" + jarra4L.getCantAgua() + ", jarra3L=" + jarra3L.getCantAgua() + "] ; ";
+		return "[jarra4L=" + jarra4L.getCantAgua() + ", jarra3L=" + jarra3L.getCantAgua() + "]";
 	}
 
 	@Override

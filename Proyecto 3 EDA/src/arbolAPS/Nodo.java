@@ -54,7 +54,7 @@ public class Nodo <T extends Comparable<T>>{
 
 	public void setSigHermano(Nodo<T> hermano) {
 		 if (hermano != null) {
-	            hermano.setPadre(this.getPadre());//el padre del hermano es igual al del actual
+	            hermano.setPadre(this);//el padre del hermano es igual al del actual
 	        }
 		this.sigHermano = hermano;
 	}

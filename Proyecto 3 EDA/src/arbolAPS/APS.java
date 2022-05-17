@@ -16,9 +16,11 @@ public class APS<T extends Comparable<T>> {
 		if(padre == null) {
 			throw new ExceptionNodo();//el padre es nulo, no hay donde insertarlo
 		} else {//verifica si el padre existe
-			Nodo<T> Nodoaux;
+			Nodo<T> Nodoaux = padre;
+			//Nodo<T> Nodoaux;
 			// Nodo<T> Nodoaux = buscarNodo(padre.getLlave());
-			if ((Nodoaux = buscarNodo(padre.getLlave())) != null && Nodoaux.getHijo() == null) {//si el padre no tiene hijos pone el que se quiere insertar de hijo
+			//if ((Nodoaux = buscarNodo(padre.getLlave())) != null && Nodoaux.getHijo() == null) {//si el padre no tiene hijos pone el que se quiere insertar de hijo
+			if (Nodoaux.getHijo() == null) {
 				Nodoaux.setHijo(n);
 			} else if (Nodoaux != null) {
 				Nodoaux = Nodoaux.getHijo();//si si tiene hijos entonces se pasa al primer hijo
@@ -26,8 +28,6 @@ public class APS<T extends Comparable<T>> {
 					Nodoaux = Nodoaux.getSigHermano();//se recorren los hermanos y se inserta en el primer hermano nulo
 				}
 				Nodoaux.setSigHermano(n);
-			} else {
-				throw new ExceptionNodo();//si el padre no se encuentra en el arbol lanza esto
 			}
 		}
 	}

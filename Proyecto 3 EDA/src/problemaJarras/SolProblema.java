@@ -30,16 +30,16 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 		ArrayList<Nodo<Jarras>> nuevosHijos = new ArrayList<Nodo<Jarras>>();
 		
 		if (cantAgua3L(n) != 3) {//llenar 3L
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(cantAgua4L(n), 3)));	
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(cantAgua4L(n), 3, " se llena la jarra de 3L ")));	
 		}
 		if (cantAgua4L(n) != 4) {//llenar 4L
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, cantAgua3L(n))));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(4, cantAgua3L(n), " se llena la jarra de 4L ")));
 		}
 		if (cantAgua3L(n) != 0) {//Vaciar 3L
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(cantAgua4L(n), 0)));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(cantAgua4L(n), 0, " se vacia la jarra de 3L ")));
 		}
-		if (cantAgua4L(n) != 0) {//Vaciar 4L
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(0, cantAgua3L(n))));
+		if (cantAgua4L(n) != 0) {//Vaciar 4L 
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(0, cantAgua3L(n), " se llena la jarra de 4L ")));
 		}
 		if (cantAgua4L(n) != 4 && cantAgua3L(n) != 0) {//Trasvasar 3L a 4L 
 			int aux3L = cantAgua3L(n);
@@ -48,7 +48,7 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 				aux4L++;
 				aux3L--;
 			}
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(aux4L, aux3L)));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(aux4L, aux3L, " se trasvasa de la jarra 3L a la de 4L ")));
 		}
 		if (cantAgua4L(n) != 0 && cantAgua3L(n) != 3) {//Trasvasar 4L a 3L
 			int aux3L = cantAgua3L(n);
@@ -57,11 +57,11 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 				aux4L--;
 				aux3L++;
 			}
-			nuevosHijos.add(new Nodo<Jarras>(new Jarras(aux4L, aux3L)));
+			nuevosHijos.add(new Nodo<Jarras>(new Jarras(aux4L, aux3L, " se trasvasa de la jarra 4L a la de 3L ")));
 		}
 		boolean aux;
 		for (int i = 0; i < nuevosHijos.size(); i++) {
-			if (aux = verificarRepetido(nuevosHijos.get(i))) {//para no insertar nodos repetidos
+			if (aux = verificarRepetido(nuevosHijos.get(i), n)) {//para no insertar nodos repetidos
 				arbol.insertNodo(nuevosHijos.get(i), n);
 			}
 			nuevosHijos.get(i).getLlave().setActivo(aux);//los pone inactivos para que no se usen en resolver
@@ -75,12 +75,18 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 		Nodo<Jarras> nodo = n;
 		while (nodo.getPadre() != null) {//recorre todos los padres hasta que el padre sea nulo
 			camino.push(nodo);
+			while (nodo.getPadre() != null && nodo.getPadre().getSigHermano() == nodo) {
+				nodo = nodo.getPadre(); 
+			}
 			nodo = nodo.getPadre();
 		}
 		camino.push(nodo);//se inserta el ultimo nodo
+		System.out.println("Cantidad de pasos de la ruta(contando estado inicial): "+camino.size());
 		while (!camino.empty()) {
-			System.out.print(camino.pop().getLlave().toString() + " ");//se imprime la ruta 
+			nodo = camino.pop();
+			System.out.print(nodo.getLlave().getAccion() + nodo.getLlave().toString());//se imprime la ruta 
 		}
+		System.out.println();
 		System.out.println();
 	}
 
@@ -96,11 +102,24 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 		return n.getLlave().getJarra3L().getCantAgua();
 	}
 	
-	public boolean verificarRepetido(Nodo<Jarras> n) {//verifica si ya existe el nodo, devuelve true si no esta repetido
+	public boolean verificarRepetido(Nodo<Jarras> n, Nodo<Jarras> r) {//verifica si ya existe el nodo, devuelve true si no esta repetido
+		/*
 		Nodo<Jarras> aux = arbol.buscarNodo(n.getLlave());
 		if (aux != null) //si es distinto de nulo quiere decir que si encontro un nodo con esa llave
 			return false;
 		return true;
+		*/
+		Nodo<Jarras> nodo = r;
+		while (nodo != null && nodo.getLlave().compareTo(n.getLlave()) != 0) {//que existan mas padres y que no sean iguales
+			while (nodo.getPadre() != null && nodo.getPadre().getSigHermano() == nodo) {
+				nodo = nodo.getPadre(); 
+			}
+			nodo = nodo.getPadre();
+		}
+		if (nodo != null)//distinto de nulo, es decir, si lo encontro
+			return false;
+		return true;
+		
 	}
 
 }
