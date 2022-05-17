@@ -30,9 +30,9 @@ public class Nodo <T extends Comparable<T>>{
 	}
 
 	public void setHijo(Nodo<T> hijo) {//cuando se añade un hijo se pone que su padre sea este
-		 if (hijo != null) {
-	            hijo.setPadre(this);
-	        }
+		if (hijo != null) {
+			hijo.setPadre(this);
+	    }
 		this.hijo = hijo;
 	}
 

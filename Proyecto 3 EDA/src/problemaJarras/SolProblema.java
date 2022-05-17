@@ -7,16 +7,16 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 
 	private APS<Jarras> arbol;
 
-	public SolProblema(APS<Jarras> arbol) {
+	public SolProblema(APS<Jarras> arbol) throws ExceptionNodo {
 		this.arbol = arbol;
 		resolver();//al crearse el arbol inmediatamente crea la solucion al problema
 	}
 
-	public void resolver() {// se encarga de hacer la solucion para el acertijo
+	public void resolver() throws ExceptionNodo {// se encarga de hacer la solucion para el acertijo
 		resolver(arbol.getRaiz());
 	}
 
-	public void resolver(Nodo<Jarras> n) {// se encarga de hacer la solucion para el acertijo
+	public void resolver(Nodo<Jarras> n) throws ExceptionNodo {// se encarga de hacer la solucion para el acertijo
 		if (cantAgua3L(n) == 2 || cantAgua4L(n) == 2)
 			mostrarRuta(n);
 		else if (n.getLlave().isActivo()) {//unicamente crea generaciones si esta activo el nodo que se le envio
@@ -26,7 +26,7 @@ public class SolProblema {// esta clase se ocupa de resolver el problema de las 
 		}
 	}
 
-	public ArrayList<Nodo<Jarras>> nuevaGeneracion(Nodo<Jarras> n) {// crea una nueva generacion el el arbol variando un solo																		// dato
+	public ArrayList<Nodo<Jarras>> nuevaGeneracion(Nodo<Jarras> n) throws ExceptionNodo {// crea una nueva generacion el el arbol variando un solo																		// dato
 		ArrayList<Nodo<Jarras>> nuevosHijos = new ArrayList<Nodo<Jarras>>();
 		
 		if (cantAgua3L(n) != 3) {//llenar 3L

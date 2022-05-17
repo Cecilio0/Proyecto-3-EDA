@@ -12,20 +12,23 @@ public class APS<T extends Comparable<T>> {
 		return raiz;
 	}
 	
-	public void insertNodo(Nodo<T> n, Nodo<T> padre) {
-		if (padre != null) {//verifica si el padre existe
+	public void insertNodo(Nodo<T> n, Nodo<T> padre) throws ExceptionNodo {
+		if(padre == null) {
+			throw new ExceptionNodo();//el padre es nulo, no hay donde insertarlo
+		} else {//verifica si el padre existe
 			Nodo<T> Nodoaux;
 			// Nodo<T> Nodoaux = buscarNodo(padre.getLlave());
 			if ((Nodoaux = buscarNodo(padre.getLlave())) != null && Nodoaux.getHijo() == null) {//si el padre no tiene hijos pone el que se quiere insertar de hijo
 				Nodoaux.setHijo(n);
-			} else {
+			} else if (Nodoaux != null) {
 				Nodoaux = Nodoaux.getHijo();//si si tiene hijos entonces se pasa al primer hijo
 				while (Nodoaux.getSigHermano() != null) {
 					Nodoaux = Nodoaux.getSigHermano();//se recorren los hermanos y se inserta en el primer hermano nulo
 				}
 				Nodoaux.setSigHermano(n);
+			} else {
+				throw new ExceptionNodo();//si el padre no se encuentra en el arbol lanza esto
 			}
-
 		}
 	}
 
